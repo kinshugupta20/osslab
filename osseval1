@@ -1,0 +1,77 @@
+
+import math
+
+def calculate_bmi(weight, height):
+   
+    if height <= 0:
+        raise ValueError("Height must be greater than zero.")
+    return weight / (height ** 2)
+
+
+def determine_diet_status(bmi, calorie_intake, height, weight):
+
+    bmr = 10 * weight + 6.25 * height * 100 - 5 * 25 + 5
+
+    daily_caloric_needs = bmr * 1.2
+    
+    
+    if calorie_intake < daily_caloric_needs:
+        status = "Orange"  
+    else:
+        status = "Green"  
+            
+        
+    if bmi < 18.5:
+        bmi_status = "Red"  
+    elif 18.5 <= bmi < 24.9:
+        bmi_status = "Green"  
+    else:
+        bmi_status = "Orange"  
+
+    return status, bmi_status
+
+
+def manage_student_data():
+    
+    students = {
+        "kinshu gupta": {
+            "class": "Class A",
+            "height": 1.75,  # m
+            "weight": 68,    # kg
+            "sport": "cricket",
+            "calorie_intake": 2500  # daily cal consumed
+        },
+        "jatin roopchandani": {
+            "class": "Class B",
+            "height": 1.65,  
+            "weight": 52,    
+            "sport": "vollyball",
+            "calorie_intake": 1800  # daily calories consumed
+        }
+    }
+
+    
+    for student, info in students.items():
+        height = info["height"]
+        weight = info["weight"]
+        calorie_intake = info["calorie_intake"]
+
+    
+        bmi = calculate_bmi(weight, height)
+        
+        diet_status, bmi_status = determine_diet_status(bmi, calorie_intake, height, weight)
+        
+        print(f"Student: {student}")
+        print(f"Class: {info['class']}")
+        print(f"Height: {height} meters")
+        print(f"Weight: {weight} kg")
+        print(f"Sport: {info['sport']}")
+        print(f"Calorie Intake: {calorie_intake} calories")
+        print(f"BMI: {bmi:.2f}")
+        print(f"Diet Status: {diet_status}")
+        print(f"BMI Status: {bmi_status}")
+        print("-" * 40)
+
+
+if __name__ == "__main__":
+    manage_student_data()
